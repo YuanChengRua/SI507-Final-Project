@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pickup_or_delivery</title>
+</head>
+<body>
+    <form action="/handle_form_user_add" method="POST">
+        <p>
+            Do you want to pickup or delivery?<br/>
+
+			<input type="radio" name="options" id="pickup" value="pickup"> I want a Pickup !!! </input><br>
+			<input type="radio" name="options" id="delivery" value="delivery"> I want a Delivery !!! </input><br>
+
+		  </p>
+
+		<p>
+			Select minimum price:  <input name="min_price" type="number"/><br/><br/>
+			Select maximum price? <input name="max_price" type="number"/><br/><br/>
+		</p>
+
+		<p>
+			Select the category of the restaurant:
+			<select name="category" id="category" multiple>
+			  <option value="afghani">Afghan</option>
+			  <option value="african">African</option>
+			  <option value="newamerican">American (New)</option>
+			  <option value="tradamerican">American (Traditional)</option>
+				<option value = "arabian">Arabic</option>
+				<option value = "argentine">Argentine</option>
+				<option value = "armenian">Armenian</option>
+				<option value = "bbq">Barbeque</option>
+				<option value = "breakfast_brunch">Breakfast & Brunch</option>
+				<option value="british">British</option>
+				<OPTION VALUE = "buffets"> Buffets </OPTION>
+				<OPTION value = "burgers"> Burgers </OPTION>
+				<OPTION value = "cafes"> Cafes </OPTION>
+				<option value="caribbean">Caribbean</option>
+				<option value = "chicken_wings">Chicken Wings</option>
+				<option value="chinese">Chinese</option>
+				<option value = "comfortfood">Comfort Food</option>
+				<option value = "delis">Delis</option>
+				<option value="food_court">Food Court</option>
+				<option value="french">French</option>
+				<option value="halal">Halal</option>
+				<option value="hotpot">Hot Pot</option>
+				<option value="indpak">Indian</option>
+				<option value="italian">Italian</option>
+				<option value="japanese">Japanese</option>
+				<option value="korean">Korean</option>
+				<option value="mexican">Mexican</option>
+				<option value="pizza">Pizza</option>
+				<option value="salad">Salad</option>
+				<option value="seafood">Seafood</option>
+				<option value="steak">Steakhouses</option>
+
+			</select>
+		</p>
+
+        <input type="submit" value="Submit Form"/>
+    </form>
+</body>
+</html>

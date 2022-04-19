@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>User Input</title>
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<style>
+	.container {
+	  margin-top: 20px;
+	}
+	h1 {text-align: center;}
+	p {text-align: center;}
+	div {text-align: center;}
+	select {text-align-last: center;}
+	</style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" type="text/javascript" ></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript" ></script>
+	<script src="../static/auto-complete.js" type="text/javascript" ></script>
+
+</head>
+<body>
+	  <form action="/handle_form_category_and_user_location" method="POST">
+		<div class="container">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Address</h3>
+				</div>
+				<div class="panel-body">
+                    <input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text" class="form-control" name="user_address">
+				</div>
+			</div>
+		</div>
+
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVllA-JyoB6yYuLevEg1IY_n0tNy7CBYk&libraries=places&callback=initAutocomplete" async defer></script>
+
+
+		<p>
+			Select the category of the restaurant:<br/>
+			  <input type="checkbox" value="newamerican" name="option">American (New)</input><br/>
+            <input type = "checkbox" value="tradamerican" name="option"> American (Traditional)</input><br/>
+            <input type = "checkbox" value="buffets" name="option"> Buffets</input><br/>
+            <input type = "checkbox" value="burgers" name="option"> Burgers</input><br/>
+            <input type = "checkbox" value="cafes" name="option"> Cafes</input><br/>
+            <input type = "checkbox" value="chicken_wings" name="option"> Chicken Wings</input><br/>
+            <input type = "checkbox" value="chinese" name="option"> Chinese</input><br/>
+            <input type = "checkbox" value="comfortfood" name="option"> Comfort food</input><br/>
+            <input type = "checkbox" value="italian" name="option"> Italian</input><br/>
+            <input type = "checkbox" value="japanese" name="option"> Japanese</input><br/>
+            <input type = "checkbox" value="korean" name="option"> Korean</input><br/>
+            <input type = "checkbox" value="mexican" name="option"> Mexican</input><br/>
+            <input type = "checkbox" value="pizza" name="option"> Pizza</input><br/>
+		</p>
+        <p>
+        Please choose a price level<br>
+        <input type="radio" name="price" value="1">$<br/>
+        <input type="radio" name="price" value="2">$$<br/>
+        <input type="radio" name="price" value="3">$$$<br/>
+        <input type="radio" name="price" value="4">$$$$<br/>
+
+        </p>
+
+		<input type="submit" value="Submit Form"/>
+      </form>
+</body>
+</html>
