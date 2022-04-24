@@ -4,7 +4,7 @@
 
 ## Code Running Instruction
   <ul>
-  API keys: The necessary API keys are stored in the crendential.py and this file will be uploaded to Github for security reason, but it will be uploaded through Canvas. Note: Google Maps API key is uploaded, and please do not use it and replace it with your own API key
+  API keys: The necessary API keys are stored in the crendential.py and this file will be uploaded to Github for security reason, but it will be uploaded               through Canvas. Note: Google Maps API key is uploaded, and please do not use it and replace it with your own API key
   
   1. Before running the code, the credential file is needed to obtain the API keys and please click the button to run the code directly. </br>
   2. Click the local link in the command line with port 8000 (I specify it for my computer) to start using the project.</br>
