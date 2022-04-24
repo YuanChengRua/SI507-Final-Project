@@ -157,9 +157,16 @@ def process_data():
                    ('Need to get a higher rating restaurant?', ('Adjusting rating for you', None, None),
                     ('Want to find a cheaper restaurant?', ('Adjusting price for you', None, None),
                      ('Do you want to deliver the food for you?', ('selecting delivery for you', None, None), ('selecting pickup for you', None, None)))))),
-                 (redirect('/form_category_and_user_location'), None, None))
+                 ('Please select preference again', None, None))
+            jsonObj = json.dumps(mediumTree)
+            with open('json_tree.json', 'w') as outfile:
+                outfile.write(jsonObj)
 
-            output = simplePlay(mediumTree)
+            tree = json.loads(jsonObj)
+
+            output = simplePlay(tree)
+            if output == 'Please select preference again':
+                return redirect(url_for('/form_category_and_user_location'))
             if output == 'I got it':
                 t = session['table_name']
                 name = cur.execute('SELECT name FROM {} ORDER BY distance LIMIT 1 '.format(t)).fetchall()[0][0]
