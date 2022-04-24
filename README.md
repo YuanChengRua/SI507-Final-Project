@@ -15,6 +15,7 @@
 
 ## Data Structure Description
 The data structure I have implemented is a tree structure which is similar to the structure we used in project 2 and I store the questions in a tree structure like the followings:
+![alt text](https://github.com/YuanChengRua/SI507-Final-Project/blob/main/%E6%88%AA%E5%B1%8F2022-04-24%20%E4%B8%8B%E5%8D%886.00.09.png?raw=true)
 
 
 
