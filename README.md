@@ -14,8 +14,13 @@
   - With the selected dishes, the system will start delivering the food</br>
 
 ## Data Structure Description
-The data structure I have implemented is a tree structure which is similar to the structure we used in project 2 and I store the questions in a tree structure like the followings:
+The data structure I have implemented is a tree structure which is similar to the structure we used in project 2 and I store the questions in a tree structure like the followings:</br>
 ![alt text](https://github.com/YuanChengRua/SI507-Final-Project/blob/main/%E6%88%AA%E5%B1%8F2022-04-24%20%E4%B8%8B%E5%8D%886.00.09.png?raw=true)
+
+The system will initially recommend the nearest restaurant to the user and if the user like the restaurant, the system will redirect to the restaurant’s page, otherwise, the system will ask the user which dimension of the restaurant needs to be changed and after the user’s selection, the order of the table will be changed automatically based on the dimension selected; and the recommendation will be changed correspondingly. </br>
+
+![alt text](https://github.com/YuanChengRua/SI507-Final-Project/blob/main/%E6%88%AA%E5%B1%8F2022-04-24%20%E4%B8%8B%E5%8D%886.00.36.png?raw=true)
+
 
 
 
