@@ -1,5 +1,5 @@
 from flask import Flask
-from data_checkpoint import app_data
+from info_process import app_data
 import os
 
 main_app = Flask(__name__)
