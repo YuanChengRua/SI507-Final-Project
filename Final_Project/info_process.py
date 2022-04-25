@@ -156,7 +156,7 @@ def process_data():
                    ('Adjusting distance for you', None, None),
                    ('Need to get a higher rating restaurant?', ('Adjusting rating for you', None, None),
                     ('Want to find a cheaper restaurant?', ('Adjusting price for you', None, None),
-                     ('Do you want to deliver the food for you?', ('selecting delivery for you', None, None), ('selecting pickup for you', None, None)))))),
+                     ('Do you want to deliver the food for you?', ('selecting delivery for you', None, None), ('sele cting pickup for you', None, None)))))),
                  ('Please select preference again', None, None))
             jsonObj = json.dumps(mediumTree)
             with open('json_tree.json', 'w') as outfile:
