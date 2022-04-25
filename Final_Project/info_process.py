@@ -144,13 +144,17 @@ def process_data():
     conn1 = sqlite3.connect('user_temp.db', check_same_thread=False)
     cur = conn1.cursor()
     temp = session['table_name']
-    a = cur.execute('SELECT name FROM {} LIMIT 1'.format(temp)).fetchall()[0][0]
+    name = cur.execute('SELECT name FROM {} LIMIT 1'.format(temp)).fetchall()[0][0]
+    image_url = cur.execute('SELECT image_url FROM {} ORDER BY distance LIMIT 1 '.format(temp)).fetchall()[0][0]
+    display_location = \
+    cur.execute('SELECT display_location FROM {} ORDER BY distance LIMIT 1 '.format(temp)).fetchall()[0][0]
+    phone = cur.execute('SELECT phone FROM {} ORDER BY distance LIMIT 1 '.format(temp)).fetchall()[0][0]
 
     try:
         while flag:
             mediumTree = \
                 ("Do you want to select a restaurant here?",
-                 ("Is it " + a + "?",
+                 ("Is it " + name + "?",
                   ('I got it', None, None),
                   ('Need to go a little further?',
                    ('Adjusting distance for you', None, None),
@@ -169,10 +173,7 @@ def process_data():
                 return redirect(url_for('/form_category_and_user_location'))
             if output == 'I got it':
                 t = session['table_name']
-                name = cur.execute('SELECT name FROM {} ORDER BY distance LIMIT 1 '.format(t)).fetchall()[0][0]
-                image_url = cur.execute('SELECT image_url FROM {} ORDER BY distance LIMIT 1 '.format(t)).fetchall()[0][0]
-                display_location = cur.execute('SELECT display_location FROM {} ORDER BY distance LIMIT 1 '.format(t)).fetchall()[0][0]
-                phone = cur.execute('SELECT phone FROM {} ORDER BY distance LIMIT 1 '.format(t)).fetchall()[0][0]
+
                 session['name'] = name
                 session['image_url'] = image_url
                 session['display_location'] = display_location
@@ -180,59 +181,153 @@ def process_data():
                 return redirect(url_for('check_point_file.generate_menu'))
             elif output.split()[1] == 'distance':
                 t = session['table_name']
-                cur.execute('DELETE FROM {} WHERE name = ?'.format(t), (a,))
-                a = cur.execute('SELECT name FROM {} LIMIT 1'.format(t)).fetchall()[0][0]
+                cur.execute('DELETE FROM {} WHERE name = ?'.format(t), (name,))
+                name = cur.execute('SELECT name FROM {} LIMIT 1'.format(t)).fetchall()[0][0]
+                image_url = \
+                cur.execute('SELECT image_url FROM {} LIMIT 1 '.format(t)).fetchall()[0][0]
+                display_location = \
+                    cur.execute('SELECT display_location FROM {} LIMIT 1 '.format(t)).fetchall()[0][0]
+                phone = cur.execute('SELECT phone FROM {} LIMIT 1 '.format(t)).fetchall()[0][0]
+
                 conn1.commit()
 
             elif output.split()[1] == 'rating':
                 t = session['table_name']
-                cur.execute('DELETE FROM {} WHERE name =?'.format(t), (a,))
-                query1 = '''
+                cur.execute('DELETE FROM {} WHERE name =?'.format(t), (name,))
+                query_name = '''
                             SELECT name
                             FROM {}
                             ORDER BY rating DESC, distance
+                            LIMIT 1
                         '''
-                a = cur.execute(query1.format(t)).fetchall()[0][0]
+                query_image_url = '''
+                            SELECT image_url
+                            FROM {}
+                            ORDER BY rating DESC, distance
+                            LIMIT 1
+                        '''
+                query_display_location = '''
+                            SELECT display_location
+                            FROM {}
+                            ORDER BY rating DESC, distance
+                            LIMIT 1
+                        '''
+                query_phone = '''
+                            SELECT phone
+                            FROM {}
+                            ORDER BY rating DESC, distance
+                            LIMIT 1
+                '''
+                name = cur.execute(query_name.format(t)).fetchall()[0][0]
+                image_url = cur.execute(query_image_url.format(t)).fetchall()[0][0]
+                display_location = cur.execute(query_display_location.format(t)).fetchall()[0][0]
+                phone = cur.execute(query_phone.format(t)).fetchall()[0][0]
                 conn1.commit()
             elif output.split()[1] == 'price':
                 t = session['table_name']
-                cur.execute('DELETE FROM {} WHERE name =?'.format(t), (a,))
-                query1 = '''
+                cur.execute('DELETE FROM {} WHERE name =?'.format(t), (name,))
+                query_name = '''
                             SELECT name
                             FROM {}
-                            ORDER BY price, distance
-                        '''
-                a = cur.execute(query1.format(t)).fetchall()[0][0]
+                            ORDER BY price DESC, distance
+                            LIMIT 1
+                '''
+                query_image_url = '''
+                            SELECT image_url
+                            FROM {}
+                            ORDER BY price DESC, distance
+                            LIMIT 1
+                '''
+                query_display_location = '''
+                            SELECT display_location
+                            FROM {}
+                            ORDER BY price DESC, distance
+                            LIMIT 1
+                '''
+                query_phone = '''
+                            SELECT phone
+                            FROM {}
+                            ORDER BY price DESC, distance
+                            LIMIT 1
+                '''
+                name = cur.execute(query_name.format(t)).fetchall()[0][0]
+                image_url = cur.execute(query_image_url.format(t)).fetchall()[0][0]
+                display_location = cur.execute(query_display_location.format(t)).fetchall()[0][0]
+                phone = cur.execute(query_phone.format(t)).fetchall()[0][0]
                 conn1.commit()
 
             elif output.split()[1] == 'delivery':
                 print(output)
                 t = session['table_name']
-                cur.execute('DELETE FROM {} WHERE name =?'.format(t), (a,))
-                query1 = '''
-                            SELECT name
-                            FROM {}
-                            WHERE transactions = 'delivery' or transactions = 'delivery,pickup'
-                        '''
-                a = cur.execute(query1.format(t)).fetchall()[0][0]
+                cur.execute('DELETE FROM {} WHERE name =?'.format(t), (name,))
+                query_name = '''
+                             SELECT name
+                             FROM {}
+                             WHERE transactions = 'delivery' or transactions = 'delivery,pickup'
+                             LIMIT 1
+                 '''
+                query_image_url = '''
+                             SELECT image_url
+                             FROM {}
+                             WHERE transactions = 'delivery' or transactions = 'delivery,pickup'
+                             LIMIT 1
+                 '''
+                query_display_location = '''
+                             SELECT display_location
+                             FROM {}
+                             WHERE transactions = 'delivery' or transactions = 'delivery,pickup'
+                             LIMIT 1
+                 '''
+                query_phone = '''
+                             SELECT phone
+                             FROM {}
+                             WHERE transactions = 'delivery' or transactions = 'delivery,pickup'
+                             LIMIT 1
+                 '''
+                name = cur.execute(query_name.format(t)).fetchall()[0][0]
+                image_url = cur.execute(query_image_url.format(t)).fetchall()[0][0]
+                display_location = cur.execute(query_display_location.format(t)).fetchall()[0][0]
+                phone = cur.execute(query_phone.format(t)).fetchall()[0][0]
+
                 conn1.commit()
 
             elif output.split()[1] == 'pickup':
                 print(output)
                 t = session['table_name']
-                cur.execute('DELETE FROM {} WHERE name =?'.format(t), (a,))
-                query1 = '''
-                                SELECT name
-                                FROM {}
-                                WHERE transactions = '' or transactions = 'delivery,pickup'
-                            '''
-                a = cur.execute(query1.format(t)).fetchall()[0][0]
+                cur.execute('DELETE FROM {} WHERE name =?'.format(t), (name,))
+                query_name = '''
+                             SELECT name
+                             FROM {}
+                             WHERE transactions = '' or transactions = 'delivery,pickup'
+                             LIMIT 1
+                 '''
+                query_image_url = '''
+                             SELECT image_url
+                             FROM {}
+                             WHERE transactions = '' or transactions = 'delivery,pickup'
+                             LIMIT 1
+                 '''
+                query_display_location = '''
+                             SELECT display_location
+                             FROM {}
+                             WHERE transactions = '' or transactions = 'delivery,pickup'
+                             LIMIT 1
+                 '''
+                query_phone = '''
+                             SELECT phone
+                             FROM {}
+                             WHERE transactions = '' or transactions = 'delivery,pickup'
+                             LIMIT 1
+                 '''
+                name = cur.execute(query_name.format(t)).fetchall()[0][0]
+                image_url = cur.execute(query_image_url.format(t)).fetchall()[0][0]
+                display_location = cur.execute(query_display_location.format(t)).fetchall()[0][0]
+                phone = cur.execute(query_phone.format(t)).fetchall()[0][0]
                 conn1.commit()
 
                 # print(cur.execute('SELECT * FROM user_table1697_Broadway_Street').fetchall())
     except:
         return redirect(url_for('check_point_file.form_user_category'))
-    return str(temp), str(type(temp))
 
 @app_data.route('/generate_menu')
 def generate_menu():
@@ -249,6 +344,7 @@ def generate_menu():
 
     dish_name_list = [ele.text.strip() for ele in all_dish]
     if len(dish_name_list) == 0:
+        print(session['name'])
         return render_template('error_mess.html', res_name = session['name'])
 
     else:
